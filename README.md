@@ -4,3 +4,5 @@ This Arduino library is based on https://github.com/Sovichea/u8g2-khmer-support.
 Below is the result from the provided example:
 
 ![](images/fig_1.jpg)
+
+![](images/fig_2.jpg)
