@@ -268,28 +268,6 @@ U8G2_ST7920_128X64_1_SW_SPI u8g2(U8G2_R0, /* clock=*/ 13, /* data=*/ 12, /* CS=*
 
 // End of constructor list
 
-const char *str[] = {
-  "ក្ក ខ្ខ គ្គ ឃ្ឃ ង្ង",
-  "ច្ច ឆ្ឆ ជ្ជ ឈ្ឈ ញ្ញ",
-  "ដ្ដ ឋ្ឋ ឌ្ឌ ឍ្ឍ ណ្ណ",
-  "ត្ត ថ្ថ ទ្ទ ធ្ធ ន្ន",
-  "ប្ប ផ្ផ ព្ព ភ្ភ ម្ម",
-  "យ្យ រ្រ ល្ល វ្វ ស្ស ហ្ហ ឡ អ្អ",
-  "០ ១ ២ ៣ ៤ មណ្ឌល",
-  "៥ ៦ ៧ ៨ ៩ ស្បៀង ងី",
-  "ស្ត្រេស តន្ត្រី ស៊ី ចាប៉ី ស៊ាំ",
-  "ស៊ើប ប៉េងប៉ោះ ខ្ញុំ កញ្ញា",
-  "បណ្តុំ លក្ស្មី សង្គ្រៀម ឲ្យ",
-  "កំណត់សំណើមដី រៀន",
-  "ម៉ោងស្រោចៈ ចេញ ជំរឿន",
-  "ម៉ោងនៃប្រព័ន្ធ ល្បឿន",
-  "ធ្វើតេស្តការបញ្ជារ ខឿន",
-  "ជួរទី១ រយៈពេល"
-};
-
-int x = 0;
-int list_size;
-int k;
 
 void setup(void) {
 
@@ -315,12 +293,7 @@ void setup(void) {
   //pinMode(6, OUTPUT);
   //digitalWrite(6, 0);	
 
-  list_size = 16;
-  Serial.begin(115200);
-  
-  u8g2.begin();
-  u8g2.setFont(notosans_6x8);
-//    u8g2.setFont(notosans_6x9); 
+  u8g2.begin(); 
 
   /* Khmer language requires overlaying glyphs over one another.
   Therefore, transparent font mode must be turned on. */ 
@@ -330,42 +303,11 @@ void setup(void) {
 void loop(void) {
   u8g2.firstPage();
   do {
-    
-    u8g2_DrawKhmer(u8g2.getU8g2(), 0, 14, str[x]);
-    if (x+1 < list_size) 
-      u8g2_DrawKhmer(u8g2.getU8g2(), 0, 35, str[x+1]);
-    else 
-      u8g2_DrawKhmer(u8g2.getU8g2(), 0, 35, "");
-      
-    if (x+2 < list_size) 
-      u8g2_DrawKhmer(u8g2.getU8g2(), 0, 56, str[x+2]);
-    else 
-      u8g2_DrawKhmer(u8g2.getU8g2(), 0, 56, "");
-    
+    u8g2.setFont(u8g2_font_helvR08_tr);
+    u8g2.drawStr(0, 14, "Hello World!");
+    u8g2.setFont(notosans_6x8);
+//    u8g2.setFont(notosans_6x9);
+    u8g2_DrawKhmer(u8g2.getU8g2(),0,35,"សួស្តីកម្ពុជា");
   } while ( u8g2.nextPage() );
-
-  while(!Serial.available());
-  k = Serial.read();
-
-  if (k == 'n')
-  {
-    /* Display the next 3 rows in the list */
-    x += 3; 
-    if (x > list_size-1) x = 0;
-  }
-  else if (k == 'p')
-  {
-    /* Display the previous 3 rows in the list */
-    x -= 3; 
-    if (x < 0) 
-    {
-      if (list_size % 3 == 0) x = list_size - 3;
-      else x = list_size - (list_size % 3);
-    }
-  }
-  else if (k == 'h')
-  {
-    /* Return the top of the list */
-    x = 0;
-  }
+//  delay(1000);
 }
