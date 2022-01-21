@@ -306,7 +306,8 @@ void loop(void) {
     u8g2.setFont(u8g2_font_helvR08_tr);
     u8g2.drawStr(0, 14, "Hello World!");
     u8g2.setFont(notosans_6x8);
+//    u8g2.setFont(notosans_6x9);
     u8g2_DrawKhmer(u8g2.getU8g2(),0,35,"សួស្តីកម្ពុជា");
   } while ( u8g2.nextPage() );
-  //delay(1000);
+//  delay(1000);
 }
