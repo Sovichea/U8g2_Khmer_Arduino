@@ -315,7 +315,7 @@ void setup(void) {
   //pinMode(6, OUTPUT);
   //digitalWrite(6, 0);	
 
-  list_size = 16;
+  list_size = sizeof(str)/4;
   Serial.begin(115200);
   
   u8g2.begin();
